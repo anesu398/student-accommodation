@@ -1,0 +1,108 @@
+// schema.prisma
+// Specify the datasource for MongoDB
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+// Define your User model
+model User {
+  id       String @id @default(uuid()) @map("_id")
+  username String @unique
+  password String
+  email    String @unique
+  // Add other user-related fields as needed
+
+  // Define the opposite relation field for the landlord relation in the Property model
+  properties   Property[] // Add this line
+  Booking      Booking[]
+  Review       Review[]
+  Notification Notification[]
+}
+
+// Define your Property model
+model Property {
+  id                 String               @id @default(uuid()) @map("_id")
+  title              String
+  location           String
+  price              Float
+  description        String
+  landlord           User                 @relation(fields: [landlordId], references: [id])
+  landlordId         String
+  // Add other property-related fields as needed
+  Booking            Booking[]
+  Review             Review[]
+  MaintenanceRequest MaintenanceRequest[]
+}
+
+// Define your Booking model
+model Booking {
+  id         String   @id @default(uuid()) @map("_id")
+  property   Property @relation(fields: [propertyId], references: [id])
+  propertyId String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  startDate  DateTime
+  endDate    DateTime
+  // Add other booking-related fields as needed
+}
+
+// Define your Review model
+model Review {
+  id         String   @id @default(uuid()) @map("_id")
+  property   Property @relation(fields: [propertyId], references: [id])
+  propertyId String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  rating     Float
+  comment    String
+  // Add other review-related fields as needed
+}
+
+// Define your Notification model
+model Notification {
+  id        String   @id @default(uuid()) @map("_id")
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  message   String
+  createdAt DateTime @default(now())
+  // Add other notification-related fields as needed
+}
+
+// Define your MaintenanceRequest model
+model MaintenanceRequest {
+  id          String   @id @default(uuid()) @map("_id")
+  property    Property @relation(fields: [propertyId], references: [id])
+  propertyId  String
+  description String
+  status      String   @default("Pending")
+  createdAt   DateTime @default(now())
+  // Add other maintenance request-related fields as needed
+}
+
+// Define your Analytics model
+model Analytics {
+  id String @id @default(uuid()) @map("_id")
+  // Define fields for analytics data
+}
+
+// Define your Payment model
+model Payment {
+  id String @id @default(uuid()) @map("_id")
+  // Define fields for payment data
+}
+
+// Define your Geolocation model
+model Geolocation {
+  id String @id @default(uuid()) @map("_id")
+  // Define fields for geolocation data
+}
+
+// Define your MultiLanguage model
+model MultiLanguage {
+  id String @id @default(uuid()) @map("_id")
+  // Define fields for multi-language support data
+}

@@ -1,0 +1,26 @@
+{
+    "title": "Cozy Apartment Near University",
+    "location": "123 Main Street, City, State, Zip",
+    "price": 1200,
+    "description": "This cozy apartment is located just a few blocks away from the university campus. It features one bedroom, one bathroom, a fully equipped kitchen, and a spacious living area. The apartment is furnished and includes utilities. Ideal for students looking for a convenient and comfortable living space.",
+    "image": "https://example.com/apartment.jpg",
+    "amenities": [
+      "Furnished",
+      "Utilities Included",
+      "Wi-Fi",
+      "Laundry Facilities"
+    ],
+    "floorPlan": {
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "size": "500 sq ft",
+      "layout": "Open floor plan"
+    },
+    "availability": "Available Now",
+    "contact": {
+      "landlordName": "John Doe",
+      "landlordEmail": "john.doe@example.com",
+      "landlordPhone": "+263 (123) 456-7890"
+    }
+  }
+  
